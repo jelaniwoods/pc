@@ -1,0 +1,68 @@
+
+//Birth rates for teenagers aged 15–19, by race and Hispanic origin:UnitedStates
+// 2007, 2010, 2011
+
+float[] all = {41.5, 34.2, 31.3};
+float[]  white = {27.2, 23.5, 21.8};
+float[]  hisp = {75.3,55.7, 49.4};
+float[]   black = {62.0, 51.5, 47.4};
+  float[] nativ = {49.4, 38.7, 36.2};
+
+int rectSize = 10;
+void setup() {
+  size(750, 500);
+  
+  
+}
+ 
+void draw() {
+  background(255);
+ 
+  stroke(0);
+  line(50, 0, 50, 400);
+  line(50, 400, 600, 400);
+ 
+
+  fill(255, 0, 0);
+
+  text("All", 620, 300);
+   noStroke();
+    fill(0, 255, 0);
+
+   text("White", 620, 320);
+  noStroke();
+  fill(0, 255, 255);
+  text("Black", 620, 340);
+  noStroke();
+ fill(20, 155, 205); 
+  text("Hispanic", 620, 360);
+   noStroke();
+ fill(110, 15, 155);
+  text("Native", 620, 380);
+    noStroke();
+
+  text("Birth rates for teenagers aged 15–19 UnitedStates", 300, 450);
+   noStroke();
+
+  for (int i = 0; i < all.length; i++) {
+      fill(255, 0, 0);
+    rect(i*100 + 60, 400 - all[i] * 5, rectSize, all[i] * 5);
+      fill(0, 255, 0);
+    rect(i*100 + 60 + rectSize, 400 - white[i] *5, rectSize, white[i]*5);
+      fill(0, 255, 255);
+    rect(i*100 + 60 + 2*rectSize, 400 - black[i] *5, rectSize, black[i]*5);
+      fill(20, 155, 205);
+
+    rect(i*100 + 60 + 3*rectSize, 400 - hisp[i] *5, rectSize, hisp[i]*5);
+
+      fill(110, 15, 155);
+
+    rect(i*100 + 60 + 4*rectSize, 400 - nativ[i] *5, rectSize, nativ[i]*5);
+
+  }
+  
+  text("2007                     2010                  2011", 80, 420);
+    rotate(PI/2);
+  text("Rate per 1000 Women", 150, -30);
+  
+}
