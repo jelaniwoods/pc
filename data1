@@ -1,0 +1,37 @@
+float[] data = { 1.55, 1.30, 1.35, 1.33, 1.29};
+String[] days = {"March 11", "March 18", "March 25", "April 8", "April 15"};
+
+//Size of the square point
+int size = 10;
+
+
+void setup()
+{
+  size(550, 450);
+  background(121, 98, 211);
+}
+
+void draw()
+{
+  
+  fill(0);
+  text("Samurai Jack Season 5 Episode Ratings", 145, 50);
+  
+  
+   line(50, 50, 50, 375);
+   line(50, 335, 600, 335);
+   int x = 100;
+   for (int i = 0; i < data.length; i++) {
+      fill(174, (i+1)*(50/2), 0);
+      ellipse(x*(i+1), 525 - data[i]*x*2, size, size);
+      text(days[i], x*(i+1) - x/4, 350);
+   }
+
+   for (int i = 0; i < data.length - 1; i++) {
+      line(x*(i+1) + size/4,  525 - data[i]*x*2 , x*(i+2) -size/4, 525 - data[i+1]*x*2 + size/4 );
+   }
+   
+   rotate(PI/2);
+   fill(0);
+   text("Viewers ( Millions )", 120, -20);
+}
