@@ -1,0 +1,91 @@
+import twitter4j.conf.*;
+import twitter4j.*;
+import twitter4j.auth.*;
+import twitter4j.api.*;
+import java.util.*;
+
+Twitter twitter;
+
+
+
+String searchString = "thezonecast";
+List<Status> tweets;
+int currentTweet, size;
+
+void setup()
+{
+    size(800,600);
+
+    ConfigurationBuilder cb = new ConfigurationBuilder();
+    cb.setOAuthConsumerKey(*************************");
+    cb.setOAuthConsumerSecret("********************");
+    cb.setOAuthAccessToken("*******************************");
+    cb.setOAuthAccessTokenSecret("**************************");
+
+    TwitterFactory tf = new TwitterFactory(cb.build());
+
+    twitter = tf.getInstance();
+
+    getNewTweets();
+    
+    currentTweet = 0;
+    thread("refreshTweets");
+}
+
+void draw()
+{
+    fill(0, 40);
+    rect(0, 0, width, height);
+
+    background(10);
+    currentTweet = currentTweet + 1;
+    size+= 10;
+    if (currentTweet >= tweets.size()-1)
+    {
+        currentTweet = 0;
+        //size /= size/4;
+    }
+
+    Status status = tweets.get(currentTweet);
+
+   
+    float w = random(width -100), h = random(height-100);
+    fill(180, 255, 40);
+    ellipse(abs((h-90) - w), w + 50, 45, 45);
+    fill(w, h, abs(h-w));
+    ellipse(155, 155, size, size);
+    fill(180- size, 2*size, 40);
+    ellipse(w, h, 45, 45);
+    String x = status.getText();
+    text(status.getText(), 400, 400, 300, 200);
+
+    delay(1050);
+}
+
+void getNewTweets()
+{
+    try
+    {
+        Query query = new Query(searchString);
+
+        QueryResult result = twitter.search(query);
+
+        tweets = result.getTweets();
+    }
+    catch (TwitterException te)
+    {
+        System.out.println("Failed to search tweets: " + te.getMessage());
+        System.exit(-1);
+    }
+}
+void refreshTweets()
+{
+    while (true)
+    {
+        getNewTweets();
+        size = 10;
+        println("Updated Tweets");
+
+        delay(30000);
+    }
+}
